@@ -1,0 +1,77 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
+  Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+ #include<stdio.h>
+ void heap_sort(int a[],int n);
+ void heapify(int a[],int n);
+ void reheapifydownward(int a[],int start,int finish);
+ int main()
+ {
+   int a[100],n;
+   printf("enter the size of n: ");
+   scanf("%d",&n);
+   printf("enter the elements in an array: ");
+   for(int i=1;i<=n;i++)
+   {
+       scanf("%d",&a[i]);
+   }
+  heap_sort(a,n);
+  printf("sorted array: ");
+  for(int i=1;i<=n;i++)
+  {
+      printf("%d",a[i]);
+  }
+ }
+void heap_sort(int a[],int n)
+{
+    heapify(a,n);
+    for(int i=n;i<1;i--)
+    {   int temp;
+        temp=a[1];
+        a[1]=a[i];
+        a[i]=temp;
+         reheapifydownward(a,1,i-1);
+    }
+   
+}
+void heapify(int a[],int n)
+{
+    int index=n/2;
+    for(int i=index;i>=1;i--)
+    {
+        reheapifydownward(a,i,n);
+    }
+}
+void reheapifydownward(int a[],int start,int finish)
+{
+   int lchild=2*start;
+    int rchild=lchild+1;
+    int index,maximum;
+    if(lchild<=finish)
+    {
+        maximum=a[lchild];
+        index=lchild;
+        if(rchild<=finish)
+        {
+            if(a[rchild>maximum])
+            {
+                maximum=a[rchild];
+                index=rchild;
+            }
+        }
+    }
+    if(a[start]<a[index])
+    {   int temp;
+        temp=a[start];
+        a[start]=a[index];
+        a[index]=temp;
+        reheapifydownward(a,index,finish);
+    }
+}
+        
+        
